@@ -4,10 +4,12 @@ import java.util.Objects;
 
 public class StorageItem {
 
+    private Long id;
     private Goods goods;
     private long count;
 
-    public StorageItem(Goods goods, long count) {
+    public StorageItem(Long id,Goods goods, long count) {
+        this.id = id;
         this.goods = goods;
         this.count = count;
     }
@@ -25,12 +27,12 @@ public class StorageItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StorageItem that = (StorageItem) o;
-        return goods.equals(that.goods);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(goods);
+        return Objects.hash(id);
     }
 
     public void addCount(long count) {
@@ -47,5 +49,9 @@ public class StorageItem {
                 "goods=" + goods +
                 ", count=" + count +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
     }
 }
