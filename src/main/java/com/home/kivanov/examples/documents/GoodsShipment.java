@@ -1,15 +1,14 @@
 package com.home.kivanov.examples.documents;
 
 import com.home.kivanov.examples.goods.StorageItem;
-import com.home.kivanov.examples.storage.Storage;
+import com.home.kivanov.examples.services.StorageServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GoodsShipment extends AbstractStorageDocument {
 
-    public GoodsShipment(Storage storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
+    public GoodsShipment(StorageServiceImpl storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
         super(storage, number, dateTime, storageItems);
     }
 

@@ -5,21 +5,22 @@ import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
-import com.home.kivanov.examples.storage.Storage;
+import com.home.kivanov.examples.services.StorageServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class StorageApplication {
     public void run() {
 
         System.out.println("******************************************************");
-        System.out.println("******************Storage application*****************");
+        System.out.println("******************StorageServiceImpl application*****************");
         printMenu();
 
-        final Storage storage = new Storage();
+        final StorageServiceImpl storage = new StorageServiceImpl();
 
         final Scanner scanner = new Scanner(System.in);
         String command = null;
@@ -99,6 +100,7 @@ public class StorageApplication {
         final int count = Integer.parseInt(scanner.nextLine());
 
         return new StorageItem(
+                new Random().nextLong(),
                 new Goods(goodsName, goodsDescription),
                 count
 
