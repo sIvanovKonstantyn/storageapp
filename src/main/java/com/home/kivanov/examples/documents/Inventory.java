@@ -11,7 +11,7 @@ public class Inventory extends AbstractStorageDocument {
         super(id, storage, number, dateTime, storageItems);
     }
 
-    public List<StorageItem> calculate() {
-        return storage.findAll();
+    public Inventory(Long id, String number) {
+        super(id, number);
     }
 }

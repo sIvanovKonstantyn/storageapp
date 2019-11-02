@@ -9,7 +9,6 @@ import com.home.kivanov.examples.services.*;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -22,8 +21,8 @@ public class StorageApplication {
         System.out.println("******************Storage application*****************");
         printMenu();
 
-        final StorageService storage = new StorageServiceImpl();
-        final GoodsArrivalService goodsArrivalService = new GoodsArrivalServiceImpl(storage);
+        final StorageService storageService = new StorageServiceImpl();
+        final GoodsArrivalService goodsArrivalService = new GoodsArrivalServiceImpl(storageService);
 
         final Scanner scanner = new Scanner(System.in);
         String command = null;
@@ -35,7 +34,7 @@ public class StorageApplication {
                 case "1": {
                     GoodsArrival goodsArrival = new GoodsArrival(
                             1L,
-                            storage,
+                            storageService,
                             "GA001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -50,7 +49,7 @@ public class StorageApplication {
                 case "2": {
                     GoodsShipment goodsShipment = new GoodsShipment(
                             1L,
-                            storage,
+                            storageService,
                             "GS001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -58,7 +57,7 @@ public class StorageApplication {
                             )
                     );
 
-                    final GoodsShipmentService goodsShipmentService = new GoodsShipmentServiceImpl(storage);
+                    final GoodsShipmentService goodsShipmentService = new GoodsShipmentServiceImpl(storageService);
 
                     goodsShipmentService.takeGoodsFromStorageByGoodsShipment(goodsShipment);
                     System.out.println(goodsShipment.getGoods() + " has taken");
@@ -67,7 +66,7 @@ public class StorageApplication {
                 case "3": {
                     Inventory inventory = new Inventory(
                             1L,
-                            storage,
+                            storageService,
                             "IN001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -75,8 +74,9 @@ public class StorageApplication {
                             )
                     );
 
-                    List<StorageItem> inventoryResultList = inventory.calculate();
-                    System.out.println("inventory result: " + inventoryResultList);
+                    InventoryService inventoryService = new InventoryServiceImpl(storageService);
+                    System.out.println("All goods: " + inventoryService.calculate());
+                    System.out.println("inventory result: " + inventoryService.calculate(inventory));
                 }
             }
 
