@@ -8,5 +8,5 @@ public interface GoodsArrivalService {
 
     GoodsArrival create();
 
-    GoodsArrival addGoodsToStorageByGoodsArrival(GoodsArrival document);
+    void addGoodsToStorageByGoodsArrival(GoodsArrival document);
 }

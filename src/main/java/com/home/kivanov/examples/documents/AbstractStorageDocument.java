@@ -2,7 +2,6 @@ package com.home.kivanov.examples.documents;
 
 import com.home.kivanov.examples.goods.StorageItem;
 import com.home.kivanov.examples.services.StorageService;
-import com.home.kivanov.examples.services.StorageServiceImpl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.Objects;
 
 public abstract class AbstractStorageDocument {
 
-    protected Long id;
+    private Long id;
     protected StorageService storage;
     protected String number;
     protected LocalDateTime dateTime;
@@ -22,6 +21,12 @@ public abstract class AbstractStorageDocument {
         this.number = number;
         this.dateTime = dateTime;
         this.goods = goods;
+    }
+
+    public AbstractStorageDocument(Long id, String number) {
+        this.id = id;
+        this.number = number;
+        this.dateTime = LocalDateTime.now();
     }
 
     public List<StorageItem> getGoods() {
@@ -39,5 +44,9 @@ public abstract class AbstractStorageDocument {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Long getId() {
+        return id;
     }
 }

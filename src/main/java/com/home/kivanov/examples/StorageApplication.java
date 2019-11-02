@@ -5,6 +5,8 @@ import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
+import com.home.kivanov.examples.services.GoodsArrivalService;
+import com.home.kivanov.examples.services.GoodsArrivalServiceImpl;
 import com.home.kivanov.examples.services.StorageService;
 import com.home.kivanov.examples.services.StorageServiceImpl;
 
@@ -24,6 +26,7 @@ public class StorageApplication {
         printMenu();
 
         final StorageService storage = new StorageServiceImpl();
+        final GoodsArrivalService goodsArrivalService = new GoodsArrivalServiceImpl(storage);
 
         final Scanner scanner = new Scanner(System.in);
         String command = null;
@@ -43,7 +46,7 @@ public class StorageApplication {
                             )
                     );
 
-                    goodsArrival.addToStorage();
+                    goodsArrivalService.addGoodsToStorageByGoodsArrival(goodsArrival);
                     System.out.println(goodsArrival.getGoods() + " has added");
                     break;
                 }

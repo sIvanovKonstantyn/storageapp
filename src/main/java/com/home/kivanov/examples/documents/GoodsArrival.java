@@ -11,9 +11,7 @@ public class GoodsArrival extends AbstractStorageDocument {
         super(id, storage, number, dateTime, storageItems);
     }
 
-    public void addToStorage() {
-        goods.forEach(
-                storageItem -> storage.add(storageItem)
-        );
+    public GoodsArrival(Long id, String number) {
+        super(id, number);
     }
 }
