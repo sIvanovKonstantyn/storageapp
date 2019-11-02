@@ -5,10 +5,7 @@ import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
-import com.home.kivanov.examples.services.GoodsArrivalService;
-import com.home.kivanov.examples.services.GoodsArrivalServiceImpl;
-import com.home.kivanov.examples.services.StorageService;
-import com.home.kivanov.examples.services.StorageServiceImpl;
+import com.home.kivanov.examples.services.*;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -61,7 +58,9 @@ public class StorageApplication {
                             )
                     );
 
-                    goodsShipment.takeFromStorage();
+                    final GoodsShipmentService goodsShipmentService = new GoodsShipmentServiceImpl(storage);
+
+                    goodsShipmentService.takeGoodsFromStorageByGoodsShipment(goodsShipment);
                     System.out.println(goodsShipment.getGoods() + " has taken");
                     break;
                 }

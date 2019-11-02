@@ -12,7 +12,7 @@ public class GoodsShipment extends AbstractStorageDocument {
         super(id, storage, number, dateTime, storageItems);
     }
 
-    public void takeFromStorage() {
-        goods.forEach(storageItem -> storage.take(storageItem));
+    public GoodsShipment(Long id, String number) {
+        super(id, number);
     }
 }
