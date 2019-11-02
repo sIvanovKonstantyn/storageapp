@@ -5,6 +5,7 @@ import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
+import com.home.kivanov.examples.services.StorageService;
 import com.home.kivanov.examples.services.StorageServiceImpl;
 
 import java.time.LocalDateTime;
@@ -14,13 +15,15 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class StorageApplication {
+
+
     public void run() {
 
         System.out.println("******************************************************");
-        System.out.println("******************StorageServiceImpl application*****************");
+        System.out.println("******************Storage application*****************");
         printMenu();
 
-        final StorageServiceImpl storage = new StorageServiceImpl();
+        final StorageService storage = new StorageServiceImpl();
 
         final Scanner scanner = new Scanner(System.in);
         String command = null;

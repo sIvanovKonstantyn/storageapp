@@ -2,6 +2,8 @@ package com.home.kivanov.examples.services;
 
 import com.home.kivanov.examples.goods.StorageItem;
 
+import java.util.List;
+
 public interface StorageService {
 
     StorageItem findById(Long id);
@@ -10,5 +12,5 @@ public interface StorageService {
 
     void take(StorageItem storageItem);
 
-    Iterable<StorageItem> findAll();
+    List<StorageItem> findAll();
 }
