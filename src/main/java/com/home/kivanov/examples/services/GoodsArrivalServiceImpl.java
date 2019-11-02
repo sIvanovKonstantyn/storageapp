@@ -27,7 +27,6 @@ public class GoodsArrivalServiceImpl implements GoodsArrivalService {
 
     @Override
     public GoodsArrival create() {
-
         Long maxId = goodsArrivals
                 .stream()
                 .map(AbstractStorageDocument::getId)

@@ -42,6 +42,8 @@ public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
     @Override
     public void takeGoodsFromStorageByGoodsShipment(GoodsShipment document) {
-        document.getGoods().forEach(storageItem -> storageService.take(storageItem));
+        document
+                .getGoods()
+                .forEach(storageItem -> storageService.take(storageItem));
     }
 }
