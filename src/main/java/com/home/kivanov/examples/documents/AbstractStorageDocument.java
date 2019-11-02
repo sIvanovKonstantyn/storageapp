@@ -9,12 +9,14 @@ import java.util.List;
 
 public abstract class AbstractStorageDocument {
 
+    protected Long id;
     protected StorageService storage;
     protected String number;
     protected LocalDateTime dateTime;
     protected List<StorageItem> goods;
 
-    public AbstractStorageDocument(StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> goods) {
+    public AbstractStorageDocument(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> goods) {
+        this.id = id;
         this.storage = storage;
         this.number = number;
         this.dateTime = dateTime;

@@ -34,6 +34,7 @@ public class StorageApplication {
             switch (command) {
                 case "1": {
                     GoodsArrival goodsArrival = new GoodsArrival(
+                            1L,
                             storage,
                             "GA001",
                             LocalDateTime.now(),
@@ -48,6 +49,7 @@ public class StorageApplication {
                 }
                 case "2": {
                     GoodsShipment goodsShipment = new GoodsShipment(
+                            1L,
                             storage,
                             "GS001",
                             LocalDateTime.now(),
@@ -62,6 +64,7 @@ public class StorageApplication {
                 }
                 case "3": {
                     Inventory inventory = new Inventory(
+                            1L,
                             storage,
                             "IN001",
                             LocalDateTime.now(),

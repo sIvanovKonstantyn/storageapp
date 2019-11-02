@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class GoodsArrival extends AbstractStorageDocument {
-    public GoodsArrival(StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
-        super(storage, number, dateTime, storageItems);
+    public GoodsArrival(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
+        super(id, storage, number, dateTime, storageItems);
     }
 
     public void addToStorage() {

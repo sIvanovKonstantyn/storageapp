@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Inventory extends AbstractStorageDocument {
-    public Inventory(StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
-        super(storage, number, dateTime, storageItems);
+    public Inventory(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
+        super(id, storage, number, dateTime, storageItems);
     }
 
     public List<StorageItem> calculate() {

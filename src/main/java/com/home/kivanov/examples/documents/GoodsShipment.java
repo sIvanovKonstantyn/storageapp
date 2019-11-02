@@ -8,8 +8,8 @@ import java.util.List;
 
 public class GoodsShipment extends AbstractStorageDocument {
 
-    public GoodsShipment(StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
-        super(storage, number, dateTime, storageItems);
+    public GoodsShipment(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
+        super(id, storage, number, dateTime, storageItems);
     }
 
     public void takeFromStorage() {
