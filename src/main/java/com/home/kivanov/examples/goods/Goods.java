@@ -1,8 +1,9 @@
 package com.home.kivanov.examples.goods;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Goods {
+public class Goods implements Serializable {
 
     private String name;
     private String description;
@@ -10,6 +11,12 @@ public class Goods {
     public Goods(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Goods(String dataString) {
+        final String[] data = dataString.split(";");
+        this.name = data[0];
+        this.description = data[1];
     }
 
     public String getName() {

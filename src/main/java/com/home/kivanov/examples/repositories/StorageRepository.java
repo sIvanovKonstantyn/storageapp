@@ -11,7 +11,7 @@ public interface StorageRepository {
 
     List<StorageItem> getAll();
 
-    void update(StorageItem storageItem);
+    Optional<StorageItem> update(StorageItem storageItem);
 
-    void save(StorageItem storageItem);
+    Optional<StorageItem> save(StorageItem storageItem);
 }

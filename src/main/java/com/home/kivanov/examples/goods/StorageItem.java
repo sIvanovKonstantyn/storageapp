@@ -6,7 +6,7 @@ public class StorageItem {
 
     private Long id;
     private Goods goods;
-    private long count;
+    private Long count;
 
     public StorageItem(Long id,Goods goods, long count) {
         this.id = id;
@@ -53,5 +53,9 @@ public class StorageItem {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
