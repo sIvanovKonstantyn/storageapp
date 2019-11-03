@@ -4,6 +4,7 @@ import com.home.kivanov.examples.goods.StorageItem;
 import com.home.kivanov.examples.services.StorageService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +14,7 @@ public abstract class AbstractStorageDocument {
     protected StorageService storage;
     protected String number;
     protected LocalDateTime dateTime;
-    protected List<StorageItem> goods;
+    protected List<StorageItem> goods = new ArrayList<>();
 
     public AbstractStorageDocument(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> goods) {
         this.id = id;
@@ -66,5 +67,13 @@ public abstract class AbstractStorageDocument {
 
     public void setGoods(List<StorageItem> goods) {
         this.goods = goods;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 }
