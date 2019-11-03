@@ -8,8 +8,13 @@ public class StorageItem {
     private Goods goods;
     private Long count;
 
-    public StorageItem(Long id,Goods goods, long count) {
+    public StorageItem(Long id, Goods goods, Long count) {
         this.id = id;
+        this.goods = goods;
+        this.count = count;
+    }
+
+    public StorageItem(Goods goods, Long count) {
         this.goods = goods;
         this.count = count;
     }

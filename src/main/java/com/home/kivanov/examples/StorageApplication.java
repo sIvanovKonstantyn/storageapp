@@ -105,7 +105,7 @@ public class StorageApplication {
         final String goodsDescription = scanner.nextLine();
 
         System.out.println("Enter a count");
-        final int count = Integer.parseInt(scanner.nextLine());
+        final Long count = Long.parseLong(scanner.nextLine());
 
         return new StorageItem(
                 new Random().nextLong(),

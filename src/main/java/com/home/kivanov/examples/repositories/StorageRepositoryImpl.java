@@ -120,8 +120,8 @@ public class StorageRepositoryImpl implements StorageRepository {
 
                 return Optional.of(storageItem);
             }
-        } catch (Exception ignored) {
-            //TODO: log it
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return Optional.empty();
