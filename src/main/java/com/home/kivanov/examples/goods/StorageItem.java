@@ -63,4 +63,8 @@ public class StorageItem {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
 }
