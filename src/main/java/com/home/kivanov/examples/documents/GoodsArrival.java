@@ -14,4 +14,8 @@ public class GoodsArrival extends AbstractStorageDocument {
     public GoodsArrival(Long id, String number) {
         super(id, number);
     }
+
+    public GoodsArrival() {
+        super();
+    }
 }

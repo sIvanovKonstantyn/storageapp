@@ -29,6 +29,8 @@ public abstract class AbstractStorageDocument {
         this.dateTime = LocalDateTime.now();
     }
 
+    public AbstractStorageDocument() {}
+
     public List<StorageItem> getGoods() {
         return goods;
     }
@@ -48,5 +50,21 @@ public abstract class AbstractStorageDocument {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setGoods(List<StorageItem> goods) {
+        this.goods = goods;
     }
 }
