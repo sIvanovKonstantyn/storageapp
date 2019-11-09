@@ -15,4 +15,8 @@ public class GoodsShipment extends AbstractStorageDocument {
     public GoodsShipment(Long id, String number) {
         super(id, number);
     }
+
+    public GoodsShipment() {
+        super();
+    }
 }

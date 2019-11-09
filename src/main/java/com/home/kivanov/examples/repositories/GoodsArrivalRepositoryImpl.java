@@ -131,7 +131,6 @@ public class GoodsArrivalRepositoryImpl implements GoodsArrivalRepository {
 
     @Override
     public Optional<GoodsArrival> update(GoodsArrival goodsArrival) {
-
         try (
                 final Connection connection = createConnection();
                 final PreparedStatement updateDocumentStatement = connection.prepareStatement(
@@ -171,7 +170,6 @@ public class GoodsArrivalRepositoryImpl implements GoodsArrivalRepository {
 
     @Override
     public Optional<GoodsArrival> save(GoodsArrival goodsArrival) {
-
         try (
                 final Connection connection = createConnection();
                 final PreparedStatement createDocumentStatement = connection.prepareStatement(
