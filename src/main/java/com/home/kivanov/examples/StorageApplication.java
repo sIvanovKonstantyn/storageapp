@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 public class StorageApplication {
 
-
     public void run() {
 
         System.out.println("******************************************************");

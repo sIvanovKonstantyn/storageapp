@@ -11,10 +11,6 @@ public class GoodsArrival extends AbstractStorageDocument {
         super(id, storage, number, dateTime, storageItems);
     }
 
-    public GoodsArrival(Long id, String number) {
-        super(id, number);
-    }
-
     public GoodsArrival() {
         super();
     }

@@ -12,10 +12,6 @@ public class GoodsShipment extends AbstractStorageDocument {
         super(id, storage, number, dateTime, storageItems);
     }
 
-    public GoodsShipment(Long id, String number) {
-        super(id, number);
-    }
-
     public GoodsShipment() {
         super();
     }
