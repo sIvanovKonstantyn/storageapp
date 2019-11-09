@@ -1,15 +1,12 @@
 package com.home.kivanov.examples.services;
 
-import com.home.kivanov.examples.documents.AbstractStorageDocument;
 import com.home.kivanov.examples.documents.GoodsShipment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.home.kivanov.examples.repositories.GoodsShipmentRepository;
+import com.home.kivanov.examples.repositories.GoodsShipmentRepositoryImpl;
 
 public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
-    private List<GoodsShipment> goodsShipments = new ArrayList<>();
-
+    private GoodsShipmentRepository goodsShipmentRepository = new GoodsShipmentRepositoryImpl();
     private StorageService storageService;
 
     public GoodsShipmentServiceImpl(StorageService storageService) {
@@ -18,31 +15,38 @@ public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
     @Override
     public GoodsShipment findById(Long id) {
-        return goodsShipments
-                .stream()
-                .filter(goodsShipment -> id.equals(goodsShipment.getId()))
-                .findAny()
+        return goodsShipmentRepository
+                .get(id)
                 .orElse(null);
     }
 
     @Override
     public GoodsShipment create() {
-        Long maxId = goodsShipments
-                .stream()
-                .map(AbstractStorageDocument::getId)
-                .max(Long::compareTo)
-                .orElse(0L);
-
-        final GoodsShipment goodsShipment = new GoodsShipment(++maxId, "GS" + maxId);
-
-        goodsShipments.add(goodsShipment);
-
-        return goodsShipment;
+        return goodsShipmentRepository
+                .save(new GoodsShipment())
+                .orElse(null);
     }
 
     @Override
-    public void takeGoodsFromStorageByGoodsShipment(GoodsShipment document) {
-        document
+    public void takeGoodsFromStorageByGoodsShipment(GoodsShipment goodsShipment) {
+
+        if (goodsShipment.getId() == null) {
+            goodsShipmentRepository.save(goodsShipment);
+            return;
+        }
+
+        GoodsShipment foundGoodsShipment = goodsShipmentRepository
+                .get(goodsShipment.getId())
+                .orElse(null);
+
+        if (foundGoodsShipment == null) {
+            goodsShipmentRepository.save(goodsShipment);
+            return;
+        }
+
+        goodsShipmentRepository.update(goodsShipment);
+
+        goodsShipment
                 .getGoods()
                 .forEach(storageItem -> storageService.take(storageItem));
     }
