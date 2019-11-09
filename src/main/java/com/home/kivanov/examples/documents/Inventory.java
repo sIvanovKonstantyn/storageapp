@@ -14,4 +14,8 @@ public class Inventory extends AbstractStorageDocument {
     public Inventory(Long id, String number) {
         super(id, number);
     }
+
+    public Inventory() {
+        super();
+    }
 }

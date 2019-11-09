@@ -119,8 +119,7 @@ public class GoodsShipmentRepositoryImpl implements GoodsShipmentRepository {
     }
 
     private GoodsShipment createGoodsShipmentWithInitialParameters(ResultSet resultSet, long currentId) throws SQLException {
-        GoodsShipment goodsShipment;
-        goodsShipment = new GoodsShipment();
+        GoodsShipment goodsShipment = new GoodsShipment();
         goodsShipment.setId(currentId);
         goodsShipment.setNumber(resultSet.getString(2));
         goodsShipment.setDateTime(

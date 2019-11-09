@@ -119,8 +119,7 @@ public class GoodsArrivalRepositoryImpl implements GoodsArrivalRepository {
     }
 
     private GoodsArrival createGoodsArrivalWithInitialParameters(ResultSet resultSet, long currentId) throws SQLException {
-        GoodsArrival goodsArrival;
-        goodsArrival = new GoodsArrival();
+        GoodsArrival goodsArrival = new GoodsArrival();
         goodsArrival.setId(currentId);
         goodsArrival.setNumber(resultSet.getString(2));
         goodsArrival.setDateTime(
