@@ -22,7 +22,6 @@ public class GoodsArrivalServiceImpl implements GoodsArrivalService {
 
     @Override
     public GoodsArrival create() {
-
         return goodsArrivalRepository
                 .save(new GoodsArrival())
                 .orElse(null);
