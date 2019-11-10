@@ -1,12 +1,12 @@
 package com.home.kivanov.examples.services;
 
 import com.home.kivanov.examples.documents.GoodsShipment;
-import com.home.kivanov.examples.repositories.GoodsShipmentRepository;
-import com.home.kivanov.examples.repositories.GoodsShipmentRepositoryImpl;
+import com.home.kivanov.examples.repositories.GoodsShipmentDocumentRepositoryImpl;
+import com.home.kivanov.examples.repositories.Repository;
 
 public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
-    private GoodsShipmentRepository goodsShipmentRepository = new GoodsShipmentRepositoryImpl();
+    private Repository goodsShipmentRepository = new GoodsShipmentDocumentRepositoryImpl();
     private StorageService storageService;
 
     public GoodsShipmentServiceImpl(StorageService storageService) {
@@ -15,14 +15,14 @@ public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
     @Override
     public GoodsShipment findById(Long id) {
-        return goodsShipmentRepository
+        return (GoodsShipment) goodsShipmentRepository
                 .get(id)
                 .orElse(null);
     }
 
     @Override
     public GoodsShipment create() {
-        return goodsShipmentRepository
+        return (GoodsShipment) goodsShipmentRepository
                 .save(new GoodsShipment())
                 .orElse(null);
     }
@@ -35,7 +35,7 @@ public class GoodsShipmentServiceImpl implements GoodsShipmentService {
             return;
         }
 
-        GoodsShipment foundGoodsShipment = goodsShipmentRepository
+        GoodsShipment foundGoodsShipment = (GoodsShipment) goodsShipmentRepository
                 .get(goodsShipment.getId())
                 .orElse(null);
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractStorageDocument {
+public abstract class AbstractStorageDocument implements DocumentWithGoods {
 
     private Long id;
     protected StorageService storage;
@@ -32,6 +32,7 @@ public abstract class AbstractStorageDocument {
 
     public AbstractStorageDocument() {}
 
+    @Override
     public List<StorageItem> getGoods() {
         return goods;
     }
@@ -49,30 +50,37 @@ public abstract class AbstractStorageDocument {
         return Objects.hash(id);
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public void setNumber(String number) {
         this.number = number;
     }
 
+    @Override
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
+    @Override
     public void setGoods(List<StorageItem> goods) {
         this.goods = goods;
     }
 
+    @Override
     public String getNumber() {
         return number;
     }
 
+    @Override
     public LocalDateTime getDateTime() {
         return dateTime;
     }

@@ -3,12 +3,13 @@ package com.home.kivanov.examples.repositories;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 
-public class StorageRepositoryImpl implements StorageRepository {
-
-    private final static String URL = "jdbc:postgresql://localhost:5432/storageAppDB/?user=postgres&password=postgres";
+public class StorageRepositoryImpl extends AbstractRepository implements StorageRepository {
 
     @Override
     public Optional<StorageItem> get(Long id) {
@@ -125,9 +126,5 @@ public class StorageRepositoryImpl implements StorageRepository {
         }
 
         return Optional.empty();
-    }
-
-    private Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(URL);
     }
 }

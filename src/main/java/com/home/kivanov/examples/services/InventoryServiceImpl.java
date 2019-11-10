@@ -2,15 +2,15 @@ package com.home.kivanov.examples.services;
 
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.StorageItem;
-import com.home.kivanov.examples.repositories.InventoryRepository;
-import com.home.kivanov.examples.repositories.InventoryRepositoryImpl;
+import com.home.kivanov.examples.repositories.InventoryDocumentRepositoryImpl;
+import com.home.kivanov.examples.repositories.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InventoryServiceImpl implements InventoryService {
 
-    private InventoryRepository inventoryRepository = new InventoryRepositoryImpl();
+    private Repository inventoryRepository = new InventoryDocumentRepositoryImpl();
     private StorageService storageService;
 
     public InventoryServiceImpl(StorageService storageService) {
@@ -19,14 +19,14 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public Inventory findById(Long id) {
-        return inventoryRepository
+        return (Inventory) inventoryRepository
                 .get(id)
                 .orElse(null);
     }
 
     @Override
     public Inventory create() {
-        return inventoryRepository
+        return (Inventory) inventoryRepository
                 .save(new Inventory())
                 .orElse(null);
     }
