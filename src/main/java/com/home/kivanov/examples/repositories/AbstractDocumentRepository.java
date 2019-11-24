@@ -13,12 +13,10 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
     public Optional<DocumentWithGoods> get(Long id) {
         try (
                 final Connection connection = createConnection();
-                final PreparedStatement preparedStatement = connection.prepareStatement(
-                        prepareGetOneSQLQueryText()
-                )
+                final PreparedStatement preparedStatement = createPreparedStatementWithParameters(connection, id);
+                final ResultSet resultSet = preparedStatement.executeQuery();
         ) {
-            preparedStatement.setLong(1, id);
-            final ResultSet resultSet = preparedStatement.executeQuery();
+
 
             final DocumentWithGoods result = getDocumentClassInstance();
             final List<StorageItem> storageItems = new ArrayList<>();
@@ -52,6 +50,12 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
         }
 
         return Optional.empty();
+    }
+
+    private PreparedStatement createPreparedStatementWithParameters(Connection connection, Long id) throws SQLException {
+        final PreparedStatement preparedStatement = connection.prepareStatement(prepareGetOneSQLQueryText());
+        preparedStatement.setLong(1, id);
+        return preparedStatement;
     }
 
     @Override
