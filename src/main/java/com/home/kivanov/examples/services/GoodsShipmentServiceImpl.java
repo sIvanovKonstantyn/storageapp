@@ -3,13 +3,20 @@ package com.home.kivanov.examples.services;
 import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.repositories.GoodsShipmentDocumentRepositoryImpl;
 import com.home.kivanov.examples.repositories.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("prototype")
 public class GoodsShipmentServiceImpl implements GoodsShipmentService {
 
-    private Repository goodsShipmentRepository = new GoodsShipmentDocumentRepositoryImpl();
-    private StorageService storageService;
+    private final GoodsShipmentDocumentRepositoryImpl goodsShipmentRepository;
+    private final StorageService storageService;
 
-    public GoodsShipmentServiceImpl(StorageService storageService) {
+    @Autowired
+    public GoodsShipmentServiceImpl(GoodsShipmentDocumentRepositoryImpl goodsShipmentRepository, StorageService storageService) {
+        this.goodsShipmentRepository = goodsShipmentRepository;
         this.storageService = storageService;
     }
 

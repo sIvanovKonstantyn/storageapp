@@ -2,8 +2,20 @@ package com.home.kivanov.examples.repositories;
 
 import com.home.kivanov.examples.documents.DocumentWithGoods;
 import com.home.kivanov.examples.documents.GoodsShipment;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
+
+@Component
+@Scope("prototype")
 public class GoodsShipmentDocumentRepositoryImpl extends AbstractDocumentRepository {
+
+    @Autowired
+    public GoodsShipmentDocumentRepositoryImpl() {
+        super();
+    }
 
     @Override
     public String prepareGetAllSQLQueryText() {

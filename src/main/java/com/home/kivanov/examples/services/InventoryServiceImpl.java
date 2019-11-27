@@ -3,17 +3,23 @@ package com.home.kivanov.examples.services;
 import com.home.kivanov.examples.documents.Inventory;
 import com.home.kivanov.examples.goods.StorageItem;
 import com.home.kivanov.examples.repositories.InventoryDocumentRepositoryImpl;
-import com.home.kivanov.examples.repositories.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
+@Scope("prototype")
 public class InventoryServiceImpl implements InventoryService {
 
-    private Repository inventoryRepository = new InventoryDocumentRepositoryImpl();
-    private StorageService storageService;
+    private final InventoryDocumentRepositoryImpl inventoryRepository;
+    private final StorageService storageService;
 
-    public InventoryServiceImpl(StorageService storageService) {
+    @Autowired
+    public InventoryServiceImpl(InventoryDocumentRepositoryImpl inventoryRepository, StorageService storageService) {
+        this.inventoryRepository = inventoryRepository;
         this.storageService = storageService;
     }
 

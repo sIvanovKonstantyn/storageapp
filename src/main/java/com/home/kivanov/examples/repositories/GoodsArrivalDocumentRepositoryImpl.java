@@ -1,8 +1,20 @@
 package com.home.kivanov.examples.repositories;
 
 import com.home.kivanov.examples.documents.GoodsArrival;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
+
+@Component
+@Scope("prototype")
 public class GoodsArrivalDocumentRepositoryImpl extends AbstractDocumentRepository {
+
+    @Autowired
+    public GoodsArrivalDocumentRepositoryImpl() {
+        super();
+    }
 
     @Override
     protected GoodsArrival getDocumentClassInstance() {

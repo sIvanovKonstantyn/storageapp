@@ -1,7 +1,10 @@
 package com.home.kivanov.examples.repositories;
 
+import com.home.kivanov.examples.config.MainConfiguration;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,13 +12,26 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 
-public class StorageRepositoryImpl extends AbstractRepository implements StorageRepository {
+@Component
+@Scope("prototype")
+public class StorageRepositoryImpl implements StorageRepository {
+
+    private Connection connection;
+
+    public StorageRepositoryImpl() {
+        this.connection = new MainConfiguration().postgresConnection();
+    }
+
+//    @Autowired
+//    public StorageRepositoryImpl(Connection connection) {
+//        this.connection = connection;
+//    }
 
     @Override
     public Optional<StorageItem> get(Long id) {
 
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = connection.prepareStatement(
                         "SELECT id, goods, count FROM storage_items WHERE id = ?"
                 )
@@ -40,11 +56,15 @@ public class StorageRepositoryImpl extends AbstractRepository implements Storage
         return Optional.empty();
     }
 
+    private Connection getConnection() {
+        return connection;
+    }
+
     @Override
     public List<StorageItem> getAll() {
 
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = connection.prepareStatement(
                         "SELECT id, goods, count FROM storage_items"
                 )
@@ -74,7 +94,7 @@ public class StorageRepositoryImpl extends AbstractRepository implements Storage
     @Override
     public Optional<StorageItem> update(StorageItem storageItem) {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = connection.prepareStatement(
                         "UPDATE storage_items SET goods=?, count=? WHERE id =?"
                 )
@@ -103,7 +123,7 @@ public class StorageRepositoryImpl extends AbstractRepository implements Storage
     @Override
     public Optional<StorageItem> save(StorageItem storageItem) {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = connection.prepareStatement(
                         "INSERT INTO storage_items (goods, count) VALUES (?, ?)",
                         Statement.RETURN_GENERATED_KEYS

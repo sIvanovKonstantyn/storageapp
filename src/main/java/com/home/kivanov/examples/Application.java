@@ -3,16 +3,33 @@ package com.home.kivanov.examples;
 import com.home.kivanov.examples.documents.GoodsArrival;
 import com.home.kivanov.examples.documents.GoodsShipment;
 import com.home.kivanov.examples.documents.Inventory;
+import com.home.kivanov.examples.documents.Storage;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
-import com.home.kivanov.examples.services.*;
+import com.home.kivanov.examples.services.GoodsArrivalService;
+import com.home.kivanov.examples.services.GoodsShipmentService;
+import com.home.kivanov.examples.services.InventoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
-public class StorageApplication {
+@Component
+public class Application {
+
+    private final GoodsArrivalService goodsArrivalService;
+    private final GoodsShipmentService goodsShipmentService;
+    private final InventoryService inventoryService;
+
+    @Autowired
+    public Application(GoodsArrivalService goodsArrivalService, GoodsShipmentService goodsShipmentService, InventoryService inventoryService) {
+        this.goodsArrivalService = goodsArrivalService;
+        this.goodsShipmentService = goodsShipmentService;
+        this.inventoryService = inventoryService;
+    }
 
     public void run() {
 
@@ -20,8 +37,6 @@ public class StorageApplication {
         System.out.println("******************Storage application*****************");
         printMenu();
 
-        final StorageService storageService = new StorageServiceImpl();
-        final GoodsArrivalService goodsArrivalService = new GoodsArrivalServiceImpl(storageService);
 
         final Scanner scanner = new Scanner(System.in);
         String command = null;
@@ -33,7 +48,7 @@ public class StorageApplication {
                 case "1": {
                     GoodsArrival goodsArrival = new GoodsArrival(
                             1L,
-                            storageService,
+                            new Storage(1L, "Single storage"),
                             "GA001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -48,7 +63,7 @@ public class StorageApplication {
                 case "2": {
                     GoodsShipment goodsShipment = new GoodsShipment(
                             1L,
-                            storageService,
+                            new Storage(1L, "Single storage"),
                             "GS001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -56,7 +71,6 @@ public class StorageApplication {
                             )
                     );
 
-                    final GoodsShipmentService goodsShipmentService = new GoodsShipmentServiceImpl(storageService);
 
                     goodsShipmentService.takeGoodsFromStorageByGoodsShipment(goodsShipment);
                     System.out.println(goodsShipment.getGoods() + " has taken");
@@ -65,7 +79,7 @@ public class StorageApplication {
                 case "3": {
                     Inventory inventory = new Inventory(
                             1L,
-                            storageService,
+                            new Storage(1L, "Single storage"),
                             "IN001",
                             LocalDateTime.now(),
                             Collections.singletonList(
@@ -73,7 +87,6 @@ public class StorageApplication {
                             )
                     );
 
-                    InventoryService inventoryService = new InventoryServiceImpl(storageService);
                     System.out.println("All goods: " + inventoryService.calculate());
                     System.out.println("inventory result: " + inventoryService.calculate(inventory));
                 }

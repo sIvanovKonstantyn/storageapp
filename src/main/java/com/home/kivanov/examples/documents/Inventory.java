@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class Inventory extends AbstractStorageDocument {
-    public Inventory(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
+    public Inventory(Long id, Storage storage, String number, LocalDateTime dateTime, List<StorageItem> storageItems) {
         super(id, storage, number, dateTime, storageItems);
     }
 

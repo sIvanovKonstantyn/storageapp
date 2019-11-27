@@ -1,16 +1,22 @@
 package com.home.kivanov.examples.services;
 
 import com.home.kivanov.examples.documents.GoodsArrival;
-import com.home.kivanov.examples.repositories.Repository;
 import com.home.kivanov.examples.repositories.GoodsArrivalDocumentRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope("prototype")
 public class GoodsArrivalServiceImpl implements GoodsArrivalService {
 
-    private Repository goodsArrivalRepository = new GoodsArrivalDocumentRepositoryImpl();
-    private StorageService storageService;
+    private final GoodsArrivalDocumentRepositoryImpl goodsArrivalRepository;
+    private final StorageService storageService;
 
-    public GoodsArrivalServiceImpl(StorageService storageService) {
+    @Autowired
+    public GoodsArrivalServiceImpl(StorageService storageService, GoodsArrivalDocumentRepositoryImpl goodsArrivalRepository) {
         this.storageService = storageService;
+        this.goodsArrivalRepository = goodsArrivalRepository;
     }
 
     @Override
@@ -48,6 +54,6 @@ public class GoodsArrivalServiceImpl implements GoodsArrivalService {
 
         goodsArrival
                 .getGoods()
-                .forEach(storageItem -> storageService.add(storageItem));
+                .forEach(storageService::add);
     }
 }

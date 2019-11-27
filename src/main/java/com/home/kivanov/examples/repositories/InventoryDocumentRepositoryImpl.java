@@ -1,9 +1,21 @@
 package com.home.kivanov.examples.repositories;
 
+import com.home.kivanov.examples.config.MainConfiguration;
 import com.home.kivanov.examples.documents.DocumentWithGoods;
 import com.home.kivanov.examples.documents.Inventory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+import java.sql.Connection;
+
+@Component
+@Scope("prototype")
 public class InventoryDocumentRepositoryImpl extends AbstractDocumentRepository {
+
+    public InventoryDocumentRepositoryImpl() {
+        super();
+    }
 
     @Override
     public String prepareGetAllSQLQueryText() {

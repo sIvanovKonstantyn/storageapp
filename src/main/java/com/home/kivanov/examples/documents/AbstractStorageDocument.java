@@ -11,12 +11,12 @@ import java.util.Objects;
 public abstract class AbstractStorageDocument implements DocumentWithGoods {
 
     private Long id;
-    protected StorageService storage;
+    protected Storage storage;
     protected String number;
     protected LocalDateTime dateTime;
     protected List<StorageItem> goods = new ArrayList<>();
 
-    public AbstractStorageDocument(Long id, StorageService storage, String number, LocalDateTime dateTime, List<StorageItem> goods) {
+    public AbstractStorageDocument(Long id, Storage storage, String number, LocalDateTime dateTime, List<StorageItem> goods) {
         this.id = id;
         this.storage = storage;
         this.number = number;

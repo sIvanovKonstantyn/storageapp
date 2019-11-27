@@ -1,5 +1,6 @@
 package com.home.kivanov.examples.repositories;
 
+import com.home.kivanov.examples.config.MainConfiguration;
 import com.home.kivanov.examples.documents.DocumentWithGoods;
 import com.home.kivanov.examples.goods.Goods;
 import com.home.kivanov.examples.goods.StorageItem;
@@ -7,12 +8,18 @@ import com.home.kivanov.examples.goods.StorageItem;
 import java.sql.*;
 import java.util.*;
 
-public abstract class AbstractDocumentRepository extends AbstractRepository implements Repository {
+public abstract class AbstractDocumentRepository implements Repository {
+
+    private final Connection connection;
+
+    protected AbstractDocumentRepository() {
+        this.connection = new MainConfiguration().postgresConnection();
+    }
 
     @Override
     public Optional<DocumentWithGoods> get(Long id) {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = createPreparedStatementWithParameters(connection, id);
                 final ResultSet resultSet = preparedStatement.executeQuery();
         ) {
@@ -52,6 +59,10 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
         return Optional.empty();
     }
 
+    private Connection getConnection() {
+        return connection;
+    }
+
     private PreparedStatement createPreparedStatementWithParameters(Connection connection, Long id) throws SQLException {
         final PreparedStatement preparedStatement = connection.prepareStatement(prepareGetOneSQLQueryText());
         preparedStatement.setLong(1, id);
@@ -61,7 +72,7 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
     @Override
     public List<DocumentWithGoods> getAll() {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement preparedStatement = connection.prepareStatement(
                         prepareGetAllSQLQueryText()
                 )
@@ -103,7 +114,7 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
     @Override
     public Optional<DocumentWithGoods> update(DocumentWithGoods document) {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement updateDocumentStatement = connection.prepareStatement(
                         prepareUpdateDocumentHeadSQLQueryText()
                 );
@@ -142,7 +153,7 @@ public abstract class AbstractDocumentRepository extends AbstractRepository impl
     @Override
     public Optional<DocumentWithGoods> save(DocumentWithGoods document) {
         try (
-                final Connection connection = createConnection();
+                final Connection connection = getConnection();
                 final PreparedStatement createDocumentStatement = connection.prepareStatement(
                         prepareCreateDocumentHeadSQLQueryText(),
                         Statement.RETURN_GENERATED_KEYS

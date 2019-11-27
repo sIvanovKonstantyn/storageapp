@@ -2,13 +2,20 @@ package com.home.kivanov.examples.services;
 
 import com.home.kivanov.examples.goods.StorageItem;
 import com.home.kivanov.examples.repositories.StorageRepository;
-import com.home.kivanov.examples.repositories.StorageRepositoryImpl;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
+@Scope("prototype")
 public class StorageServiceImpl implements StorageService {
 
-    private StorageRepository storageRepository = new StorageRepositoryImpl();
+    private final StorageRepository storageRepository;
+
+    public StorageServiceImpl(StorageRepository storageRepository) {
+        this.storageRepository = storageRepository;
+    }
 
     @Override
     public StorageItem findById(Long id) {
